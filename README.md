@@ -74,7 +74,7 @@ channel.bind('message', (data) => {
 The CDN file is a self-contained browser bundle.
 
 ```html
-<script src="https://cdn.wireblob.com/wire/latest/wire.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@wireblob/wire/lib/umd/wire.min.js"></script>
 
 <script>
   const wire = new Wire('YOUR_APP_KEY', {
