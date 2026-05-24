@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="../lib/umd/wire.min.js"></script>
+    <script>
+        const wire = new Wire('f98ad4089279700bc9606aad550f9cc2c382c783', {
+            host: 'eu-central-1.wireblob.com',
+            secure: true
+        });
+
+        const channel = wire.subscribe('chat');
+
+        channel.bind('message', (data) => {
+            console.log(data);
+        });
+    </script>
+</body>
+</html>
