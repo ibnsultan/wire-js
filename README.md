@@ -34,7 +34,7 @@ pnpm add @wireblob/wire
 
 ## Quick Start
 
-### Browser / Bundlers
+### ESM
 
 ```js
 import Wire from '@wireblob/wire';
@@ -51,9 +51,27 @@ channel.bind('message', (data) => {
 });
 ```
 
+### CommonJS
+
+```js
+const WireModule = require('@wireblob/wire');
+const Wire = WireModule.default || WireModule;
+
+const wire = new Wire('YOUR_APP_KEY', {
+  host: 'eu-central-1.wireblob.com',
+  secure: true
+});
+
+const channel = wire.subscribe('chat');
+
+channel.bind('message', (data) => {
+  console.log(data);
+});
+```
+
 ### CDN Usage
 
-The CDN file is a self-contained browser bundle. You do not need to load `pusher-js` separately.
+The CDN file is a self-contained browser bundle.
 
 ```html
 <script src="https://cdn.wireblob.com/wire/latest/wire.min.js"></script>
@@ -72,7 +90,6 @@ The CDN file is a self-contained browser bundle. You do not need to load `pusher
 </script>
 ```
 
-
 ## Constructor
 
 ```js
@@ -81,24 +98,22 @@ new Wire(appKey, options)
 
 ### Parameters
 
-| Parameter | Type     | Required | Description            |
-| --------- | -------- | -------- | ---------------------- |
+| Parameter   | Type       | Required | Description            |
+| ----------- | ---------- | -------- | ---------------------- |
 | `appKey`  | `string` | Yes      | Application public key |
 | `options` | `object` | No       | Connection options     |
 
-
 ## Configuration Options
 
-| Option              | Type      | Default         | Description                     |
-| ------------------- | --------- | --------------- | ------------------------------- |
-| `host`              | `string`  | `eu-central-1.wireblob.com` | Wireblob server hostname |
-| `secure`            | `boolean` | `true`          | Use secure websocket connection |
-| `wsPort`            | `number`  | `80`            | WebSocket port                  |
-| `wssPort`           | `number`  | `443`           | Secure WebSocket port           |
-| `enabledTransports` | `array`   | `['ws', 'wss']` | Allowed transports              |
-| `authEndpoint`      | `string`  | `null`          | Private/presence auth endpoint  |
-| `auth`              | `object`  | `{}`            | Additional auth configuration   |
-
+| Option                | Type        | Default                       | Description                     |
+| --------------------- | ----------- | ----------------------------- | ------------------------------- |
+| `host`              | `string`  | `eu-central-1.wireblob.com` | Wireblob server hostname        |
+| `secure`            | `boolean` | `true`                      | Use secure websocket connection |
+| `wsPort`            | `number`  | `80`                        | WebSocket port                  |
+| `wssPort`           | `number`  | `443`                       | Secure WebSocket port           |
+| `enabledTransports` | `array`   | `['ws', 'wss']`             | Allowed transports              |
+| `authEndpoint`      | `string`  | `null`                      | Private/presence auth endpoint  |
+| `auth`              | `object`  | `{}`                        | Additional auth configuration   |
 
 ## Subscribing to Channels
 
@@ -163,7 +178,6 @@ wire.connect();
 wire.disconnect();
 ```
 
-
 ## Private Channels
 
 ```js
@@ -187,7 +201,6 @@ channel.bind('pusher:subscription_succeeded', (members) => {
   console.log(members);
 });
 ```
-
 
 ## Node.js Usage
 
@@ -227,7 +240,6 @@ const wire = new Wire('YOUR_APP_KEY', {
 });
 ```
 
-
 ## Advanced Configuration
 
 ```js
@@ -246,7 +258,6 @@ const wire = new Wire('YOUR_APP_KEY', {
 });
 ```
 
-
 ## Debugging
 
 Enable internal Pusher logging:
@@ -254,7 +265,6 @@ Enable internal Pusher logging:
 ```js
 Wire.logToConsole = true;
 ```
-
 
 ## Architecture
 
@@ -278,7 +288,6 @@ Future versions may introduce:
 - MQTT adapters
 - custom protocol optimizations
 
-
 ## Compatibility
 
 | Platform     | Supported |
@@ -288,6 +297,6 @@ Future versions may introduce:
 | React Native | Yes       |
 | Web Workers  | Yes       |
 
-
 ## Credits
+
 - [Pusher](https://pusher.com) - Protocol and transport compatibility
