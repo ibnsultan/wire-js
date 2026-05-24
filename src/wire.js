@@ -1,4 +1,18 @@
-import Pusher from 'pusher-js';
+import PusherLib from 'pusher-js';
+
+// pusher-js is CommonJS. Depending on the module system (CJS require, Babel
+// ESM interop, native ESM) the constructor can land in different positions:
+//   - module.exports = class Pusher {}         → PusherLib is the class
+//   - module.exports = { default: Pusher }     → PusherLib.default
+//   - module.exports = { Pusher: class }       → PusherLib.Pusher
+// After Babel's _interopRequireDefault the value sits at PusherLib.default,
+// so we unwrap one more level when needed.
+const Pusher = (() => {
+  if (typeof PusherLib === 'function') return PusherLib;
+  const unwrapped = PusherLib?.default ?? PusherLib;
+  if (typeof unwrapped === 'function') return unwrapped;
+  return unwrapped?.default ?? unwrapped?.Pusher ?? unwrapped;
+})();
 
 const DEFAULT_HOST = 'eu-central-1.wireblob.com';
 
