@@ -1,1 +1,4 @@
 /node_modules/
+/examples/commonjs/node_modules/
+/examples/module/node_modules/
+wireblob-wire-*.tgz
