@@ -12,8 +12,6 @@ Wire is built as a wrapper around `pusher-js`, providing:
 - Web Worker compatibility
 - future extensibility without breaking API compatibility
 
----
-
 ## Installation
 
 ### NPM
@@ -33,8 +31,6 @@ yarn add @wireblob/wire
 ```bash
 pnpm add @wireblob/wire
 ```
-
----
 
 ## Quick Start
 
@@ -76,7 +72,6 @@ The CDN file is a self-contained browser bundle. You do not need to load `pusher
 </script>
 ```
 
----
 
 ## Constructor
 
@@ -91,7 +86,6 @@ new Wire(appKey, options)
 | `appKey`  | `string` | Yes      | Application public key |
 | `options` | `object` | No       | Connection options     |
 
----
 
 ## Configuration Options
 
@@ -105,7 +99,6 @@ new Wire(appKey, options)
 | `authEndpoint`      | `string`  | `null`          | Private/presence auth endpoint  |
 | `auth`              | `object`  | `{}`            | Additional auth configuration   |
 
----
 
 ## Subscribing to Channels
 
@@ -136,8 +129,6 @@ channel.trigger('client-message', {
 ```js
 wire.unsubscribe('chat-room');
 ```
-
----
 
 ## Connection Events
 
@@ -172,7 +163,6 @@ wire.connect();
 wire.disconnect();
 ```
 
----
 
 ## Private Channels
 
@@ -198,7 +188,6 @@ channel.bind('pusher:subscription_succeeded', (members) => {
 });
 ```
 
----
 
 ## Node.js Usage
 
@@ -238,7 +227,6 @@ const wire = new Wire('YOUR_APP_KEY', {
 });
 ```
 
----
 
 ## Advanced Configuration
 
@@ -258,7 +246,6 @@ const wire = new Wire('YOUR_APP_KEY', {
 });
 ```
 
----
 
 ## Debugging
 
@@ -268,7 +255,6 @@ Enable internal Pusher logging:
 Wire.logToConsole = true;
 ```
 
----
 
 ## Architecture
 
@@ -292,7 +278,6 @@ Future versions may introduce:
 - MQTT adapters
 - custom protocol optimizations
 
----
 
 ## Compatibility
 
@@ -303,21 +288,6 @@ Future versions may introduce:
 | React Native | Yes       |
 | Web Workers  | Yes       |
 
----
 
-## Example Chat Application
-
-```js
-import Wire from '@wireblob/wire';
-
-const wire = new Wire('YOUR_APP_KEY', {
-  host: 'eu-central-1.wireblob.com',
-  secure: true
-});
-
-const chat = wire.subscribe('chat');
-
-chat.bind('message', (data) => {
-  console.log('New message:', data);
-});
-```
+## Credits
+- [Pusher](https://pusher.com) - Protocol and transport compatibility
