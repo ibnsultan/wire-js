@@ -1,0 +1,65 @@
+{
+  "name": "@wireblob/wire",
+  "version": "1.0.0",
+  "description": "Wireblob Channels JavaScript SDK for browsers, React Native, Node.js and web workers",
+  "keywords": [
+    "wireblob",
+    "wire",
+    "realtime",
+    "websocket",
+    "channels",
+    "pusher"
+  ],
+  "homepage": "https://github.com/ibnsultan/wire-js#readme",
+  "bugs": {
+    "url": "https://github.com/ibnsultan/wire-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibnsultan/wire-js.git"
+  },
+  "license": "MIT",
+  "author": "Abdulbasit Rubeya",
+  "main": "./lib/commonjs/wire.js",
+  "module": "./lib/es/wire.js",
+  "browser": "./lib/umd/wire.min.js",
+  "exports": {
+    ".": {
+      "browser": "./lib/umd/wire.min.js",
+      "require": "./lib/commonjs/wire.js",
+      "import": "./lib/es/wire.js"
+    },
+    "./worker": {
+      "require": "./lib/commonjs/worker.js",
+      "import": "./lib/es/worker.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf lib",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm && npm run build:umd",
+    "build:cjs": "babel src --out-dir lib/commonjs --env-name cjs --ignore '**/*.test.js'",
+    "build:esm": "babel src --out-dir lib/es --env-name esm --ignore '**/*.test.js'",
+    "build:umd": "rollup -c rollup.umd.config.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "pusher-js": "^8.5.0"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.27.2",
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.41.1",
+    "terser": "^5.39.2"
+  }
+}

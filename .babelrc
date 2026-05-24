@@ -1,0 +1,48 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false,
+                "targets": ">0.25%, not dead"
+            }
+        ]
+    ],
+    "env": {
+        "cjs": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": "commonjs",
+                        "targets": {
+                            "node": "14"
+                        }
+                    }
+                ]
+            ]
+        },
+        "esm": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": ">0.25%, not dead"
+                    }
+                ]
+            ]
+        },
+        "umd": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": "umd",
+                        "targets": ">0.25%, not dead"
+                    }
+                ]
+            ]
+        }
+    }
+}
