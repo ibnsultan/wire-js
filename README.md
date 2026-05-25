@@ -131,12 +131,41 @@ channel.bind('message', (data) => {
 
 ## Triggering Events
 
-Client-triggered events require private or presence channels.
+### Client-side trigger
+
+Sends a real-time event over the existing WebSocket connection. Requires a `private-` or `presence-` channel and the event name must start with `client-`.
 
 ```js
-channel.trigger('client-message', {
-  text: 'Hello world'
+const channel = wire.subscribe('private-chat');
+
+channel.trigger('client-message', { text: 'Hello world' });
+```
+
+### Server-side trigger (Node.js)
+
+Sends an event via the Wireblob HTTP REST API. Requires `appId`, `key`, and `secret`. **Never expose your secret in browser code.**
+
+```js
+
+import Wire from '@wireblob/wire';
+
+// use this instead of import if using with commonJs
+// const WireModule = require('@wireblob/wire');
+// const Wire = WireModule.default || WireModule;
+
+const wire = new Wire({
+  appId:  'YOUR_APP_ID',
+  key:    'YOUR_APP_KEY',
+  secret: 'YOUR_APP_SECRET',
+  host:   'eu-central-1.wireblob.com',
+  secure: true
 });
+
+// Single channel
+await wire.trigger('chat', 'message', { text: 'Hello from server' });
+
+// Multiple channels
+await wire.trigger(['chat', 'notifications'], 'message', { text: 'Broadcast' });
 ```
 
 ## Unsubscribing
@@ -184,14 +213,6 @@ wire.disconnect();
 const channel = wire.subscribe('private-chat');
 ```
 
-### Server Auth Endpoint (Laravel example)
-
-```php
-Route::post('/broadcasting/auth', function () {
-    return Broadcast::auth(request());
-});
-```
-
 ## Presence Channels
 
 ```js
@@ -199,44 +220,6 @@ const channel = wire.subscribe('presence-room');
 
 channel.bind('pusher:subscription_succeeded', (members) => {
   console.log(members);
-});
-```
-
-## Node.js Usage
-
-Install websocket support:
-
-```bash
-npm install ws
-```
-
-```js
-import Wire from '@wireblob/wire';
-import WebSocket from 'ws';
-
-global.WebSocket = WebSocket;
-
-const wire = new Wire('YOUR_APP_KEY', {
-  host: 'eu-central-1.wireblob.com',
-  secure: true
-});
-```
-
-## React Native
-
-Wire works in React Native environments supporting WebSocket.
-
-```js
-import Wire from '@wireblob/wire';
-```
-
-## Web Workers
-
-```js
-import Wire from '@wireblob/wire/worker';
-
-const wire = new Wire('YOUR_APP_KEY', {
-  host: 'eu-central-1.wireblob.com'
 });
 ```
 
