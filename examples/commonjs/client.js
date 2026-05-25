@@ -1,9 +1,10 @@
-import Wire from '@wireblob/wire';
+const WireModule = require('@wireblob/wire');
+const Wire = WireModule.default || WireModule;
 
 const CHANNEL_NAME = 'my-channel';
 const EVENT_NAME = 'new-message';
 
-const wire = new Wire('YOUR_APPLICATION_KEY', {
+const wire = new Wire('YOUR_APP_KEY', {
 	host: 'eu-central-1.wireblob.com',
 	secure: true
 });
@@ -67,4 +68,3 @@ process.on('SIGINT', () => {
 		process.exit(0);
 	}
 });
-
