@@ -1,6 +1,6 @@
 {
   "name": "@wireblob/wire",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Wireblob's JavaScript SDK for browsers, React Native, Node.js and web workers",
   "keywords": [
     "wireblob",
